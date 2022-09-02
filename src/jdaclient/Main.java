@@ -2,6 +2,7 @@ package jdaclient;
 
 import jdaclient.Listener.ActionHandler;
 import jdaclient.layouts.Theme;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ public class Main {
 
     public static int theme = 0;
 
+    public static String bottoken = "1";
+
 
 
     //frames
@@ -26,6 +29,9 @@ public class Main {
     public static JMenu settings;
     public static JMenu bot;
 
+    public static JMenu token;
+
+    public static JTextField tokenfield;
 
 
 
@@ -44,12 +50,16 @@ public class Main {
     public static JTextField textField;
     public static JComboBox serverList;
 
+    public static JLabel info;
+
 
 
 
     public static void main(String[] args) {
 
         JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+
+
 
         frame();
         new Theme();
@@ -99,14 +109,22 @@ public class Main {
         listPanel.setPreferredSize(new Dimension(sideBar.getWidth(), 50));
         listPanel.setBorder(null);
 
-
-
         serverList = new JComboBox();
         serverList.setBounds(0,0,190,50);
         serverList.setBorder(null);
         serverList.setFocusable(false);
         serverList.addActionListener(new ActionHandler());
 
+        tokenfield = new JTextField();
+        tokenfield.setBorder(null);
+        tokenfield.addActionListener(new ActionHandler());
+
+        info = new JLabel();
+        info.setBounds(50,0,100,50);
+
+        info.setFocusable(false);
+
+        
 
 
 
@@ -127,12 +145,15 @@ public class Main {
         menuBar.setBorderPainted(false);
         settings = new JMenu("Settings");
         bot = new JMenu("Bot");
+        token = new JMenu("Setup");
 
 
         menuBar.add(settings);
         menuBar.add(bot);
 
-
+        //bot
+        bot.add(token);
+        token.add(tokenfield);
         //settings
 
 
@@ -147,6 +168,7 @@ public class Main {
         listPanel.add(serverList);
         sideBar.add(listPanel, BorderLayout.NORTH);
         sideBar.add(infoPanel, BorderLayout.SOUTH);
+        infoPanel.add(info);
         infoPanel.add(startButton);
         chatPanel.add(textField , BorderLayout.SOUTH);
         mainPanel.add(chatPanel , BorderLayout.CENTER);
@@ -190,6 +212,15 @@ public class Main {
         serverList.setBackground(null);
 
         listPanel.setBackground(null);
+
+        serverList.setBackground(null);
+        serverList.setForeground(Theme.schrift);
+
+        token.setBackground(Theme.background);
+        token.setForeground(Theme.schrift);
+
+        tokenfield.setBackground(Theme.background);
+        tokenfield.setForeground(Theme.schrift);
 
 
 

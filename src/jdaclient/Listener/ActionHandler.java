@@ -70,6 +70,11 @@ public class ActionHandler implements ActionListener {
             Main.textField.setText("");
 
         }
+        if (e.getSource() == Main.tokenfield){
+            Main.bottoken = Main.tokenfield.getText();
+            JDAMehodes.botToken = Main.tokenfield.getText();
+            Main.textField.setText("");
+        }
 
 
 
