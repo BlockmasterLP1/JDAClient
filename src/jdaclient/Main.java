@@ -59,7 +59,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+        JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.G01Fk-.yQK8N2jtpI2e_wR4UCXFFWCjkvfFu9r7apUpBE";
 
 
 
@@ -189,9 +189,7 @@ public class Main {
 
     }
 
-    public static void test(){
-        chat.setText();
-    }
+
 
     public static void updateComponents(){
         menuBar.setBackground(Theme.background);
