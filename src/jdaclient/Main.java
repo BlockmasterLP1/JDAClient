@@ -55,6 +55,8 @@ public class Main {
 
 
 
+
+
     public static void main(String[] args) {
 
         JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
@@ -124,7 +126,7 @@ public class Main {
 
         info.setFocusable(false);
 
-        
+
 
 
 
@@ -183,6 +185,12 @@ public class Main {
 
 
 
+
+
+    }
+
+    public static void test(){
+        chat.setText();
     }
 
     public static void updateComponents(){
