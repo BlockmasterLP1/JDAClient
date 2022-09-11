@@ -2,14 +2,26 @@ package jdaclient.Listener;
 
 import jdaclient.JDAMehodes;
 import jdaclient.Main;
+import jdaclient.layouts.Theme;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import javax.security.auth.login.LoginException;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static jdaclient.Main.*;
+import static jdaclient.JDAMehodes.*;
+import static jdaclient.layouts.Theme.*;
+
 public class ActionHandler implements ActionListener {
+
+    public static JFrame tokenframe;
+    public static  JTextField tokenfl;
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == Main.startButton){
@@ -51,7 +63,7 @@ public class ActionHandler implements ActionListener {
                 }
 
 
-            }else if (Main.startButton.getText() == "OFF"){
+            }else if (Main.startButton.getText() == "OFF") {
 
 
                 Main.startButton.setText("ON");
@@ -64,18 +76,43 @@ public class ActionHandler implements ActionListener {
         if (e.getSource() == Main.textField){
             JDAMehodes.shardMan.getGuildById("1002465926366642268").getTextChannelById("1002465927247442002").sendMessage(Main.textField.getText());
 
-
-
-
             Main.textField.setText("");
 
         }
-        if (e.getSource() == Main.tokenfield){
-            Main.bottoken = Main.tokenfield.getText();
-            JDAMehodes.botToken = Main.tokenfield.getText();
-            Main.textField.setText("");
+
+        if (e.getSource() == Main.whitemode){
+            theme = 1;
+            whitemode();
+            updateComponents();
         }
 
+        if (e.getSource() == Main.darkmode) {
+            theme = 0;
+            darkmode();
+            updateComponents();
+        }
+
+        if (e.getSource() == token) {
+            tokenframe = new JFrame("Bot");
+            tokenframe.setSize(300, 200);
+            tokenframe.setVisible(true);
+
+            tokenfl = new JTextField();
+            tokenfl.setSize(100, 50);
+            tokenfl.setBorder(null);
+            tokenfl.addActionListener(new ActionHandler());
+
+            tokenframe.add(tokenfl, BorderLayout.CENTER);
+
+
+        }
+
+        if (e.getSource() == tokenfl) {
+            JDAMehodes.botToken = tokenfl.getText();
+            System.out.println(tokenfl.getText());
+            tokenfl.setText("");
+
+        }
 
 
     }

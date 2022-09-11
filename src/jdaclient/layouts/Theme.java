@@ -29,11 +29,14 @@ public class Theme {
     }
 
     public Theme(){
-        if (Main.theme == 0){
+        if (Main.theme == 0)
+        {
             darkmode();
-        }else if (Main.theme == 1){
+        }else if (Main.theme == 1)
+        {
             whitemode();
-        }else {
+        }else
+        {
             System.out.println("pech gehabt");
         }
         Main.updateComponents();

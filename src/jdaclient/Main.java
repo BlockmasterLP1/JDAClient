@@ -2,7 +2,6 @@ package jdaclient;
 
 import jdaclient.Listener.ActionHandler;
 import jdaclient.layouts.Theme;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 
 import javax.swing.*;
@@ -10,16 +9,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import jdaclient.Listener.ActionHandler.*;
 
 public class Main {
 
     public static List<String> server = new ArrayList<>();
 
     public static int theme = 0;
-
-    public static String bottoken = "1";
-
-
 
     //frames
     public static JFrame mainframe;
@@ -29,12 +25,11 @@ public class Main {
     public static JMenu settings;
     public static JMenu bot;
 
-    public static JMenu token;
+    public static JMenu them;
+    public static JMenuItem darkmode;
+    public static JMenuItem whitemode;
 
-    public static JTextField tokenfield;
-
-
-
+    public  static  JMenuItem token;
 
     //panel
     public static JPanel  listPanel;
@@ -49,27 +44,19 @@ public class Main {
     public static JButton startButton;
     public static JTextField textField;
     public static JComboBox serverList;
-
-    public static JLabel info;
-
-
-
-
-
+    public static  JComboBox chatList;
 
     public static void main(String[] args) {
 
-        JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.G01Fk-.yQK8N2jtpI2e_wR4UCXFFWCjkvfFu9r7apUpBE";
-
-
+        JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
 
         frame();
         new Theme();
 
     }
 
-
-    public static void frame(){
+    public static void frame()
+    {
         //create Frame
         mainframe = new JFrame();
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +85,6 @@ public class Main {
         infoPanel.setLayout(null);
         infoPanel.setPreferredSize(new Dimension(sideBar.getWidth(), 50));
 
-
         startButton = new JButton("ON");
         startButton.setBounds(0,0,50,50);
         startButton.setBorder(null);
@@ -117,45 +103,39 @@ public class Main {
         serverList.setFocusable(false);
         serverList.addActionListener(new ActionHandler());
 
-        tokenfield = new JTextField();
-        tokenfield.setBorder(null);
-        tokenfield.addActionListener(new ActionHandler());
+        chatList = new JComboBox();
+        chatList.setBounds(0,150,190,50);
+        chatList.setBorder(null);
+        chatList.setFocusable(false);
 
-        info = new JLabel();
-        info.setBounds(50,0,100,50);
+        them = new JMenu("Theme");
 
-        info.setFocusable(false);
+        darkmode = new JMenuItem("Darkmode");
+        darkmode.addActionListener(new ActionHandler());
 
+        whitemode = new JMenuItem("Whitemode");
+        whitemode.addActionListener(new ActionHandler());
 
-
-
-
-
-
-
-
-
-
-
-
+        token = new JMenuItem("Token");
+        token.addActionListener(new ActionHandler());
 
         //menu
-
         menuBar = new JMenuBar();
         menuBar.setBorder(null);
         menuBar.setOpaque(true);
         menuBar.setBorderPainted(false);
         settings = new JMenu("Settings");
         bot = new JMenu("Bot");
-        token = new JMenu("Setup");
 
 
         menuBar.add(settings);
         menuBar.add(bot);
-
-        //bot
+        settings.add(them);
         bot.add(token);
-        token.add(tokenfield);
+        them.add(darkmode);
+        them.add(whitemode);
+
+
         //settings
 
 
@@ -165,12 +145,11 @@ public class Main {
         mainframe.setSize(new Dimension(750, 500));
         mainframe.setMinimumSize(new Dimension(750, 500));
 
-
         //add
         listPanel.add(serverList);
+        listPanel.add(chatList);
         sideBar.add(listPanel, BorderLayout.NORTH);
         sideBar.add(infoPanel, BorderLayout.SOUTH);
-        infoPanel.add(info);
         infoPanel.add(startButton);
         chatPanel.add(textField , BorderLayout.SOUTH);
         mainPanel.add(chatPanel , BorderLayout.CENTER);
@@ -180,16 +159,7 @@ public class Main {
         mainframe.setContentPane(mainPanel);
         mainframe.pack();
 
-
-
-
-
-
-
-
     }
-
-
 
     public static void updateComponents(){
         menuBar.setBackground(Theme.background);
@@ -217,21 +187,24 @@ public class Main {
 
         serverList.setBackground(null);
 
+        chatList.setBackground(null);
+
         listPanel.setBackground(null);
 
-        serverList.setBackground(null);
-        serverList.setForeground(Theme.schrift);
+        chatPanel.setBackground(null);
+
+        them.setBackground(Theme.background);
+        them.setForeground(Theme.schrift);
+
+        whitemode.setBackground(Theme.background);
+        whitemode.setForeground(Theme.schrift);
+
+        darkmode.setBackground(Theme.background);
+        darkmode.setForeground(Theme.schrift);
 
         token.setBackground(Theme.background);
         token.setForeground(Theme.schrift);
 
-        tokenfield.setBackground(Theme.background);
-        tokenfield.setForeground(Theme.schrift);
-
-
-
-        chatPanel.setBackground(null);
-
+        ActionHandler.tokenfl.setBackground(Theme.background);
     }
-
 }
