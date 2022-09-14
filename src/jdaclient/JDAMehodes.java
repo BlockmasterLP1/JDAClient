@@ -5,6 +5,7 @@ import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 
 public class JDAMehodes {
 
@@ -21,7 +22,7 @@ public class JDAMehodes {
 
         botToken = token;
 
-        if(botActivityType != null || botActivity != null) {
+        if (botActivityType != null || botActivity != null) {
             setActivity(botActivityType, botActivity);
         }
 
@@ -45,8 +46,17 @@ public class JDAMehodes {
         System.out.println("[JDA Client] Set activity to " + activityType + ": " + activity + "!");
     }
 
+    //setzt die Server in der ServerList Combobox
     public static void serverList() {
-
+        Main.server.clear();
+        for (Guild guild : JDAMehodes.shardMan.getGuilds()) {
+            Main.server.add(guild.getName());
+        }
+        Main.serverList.removeAllItems();
+        for (int i = 0; i < Main.server.size(); i++) {
+            System.out.println(Main.server.get(i));
+            Main.serverList.addItem(Main.server.get(i));
+        }
     }
 
     public static void channelList() {

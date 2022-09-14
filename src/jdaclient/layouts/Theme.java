@@ -17,7 +17,6 @@ public class Theme {
         components1 = Color.decode("#202225");
         schrift = Color.decode("#99AAB5");
         hover = Color.decode("#4d525b");
-
     }
     public static void whitemode(){
         background = Color.decode("#F5F5F5");
@@ -25,7 +24,6 @@ public class Theme {
         components1 = Color.decode("#ECECEC");
         schrift = Color.decode("#676767");
         hover = Color.decode("#BFBFBF");
-
     }
 
     public Theme(){

@@ -5,11 +5,13 @@ import jdaclient.Main;
 import jdaclient.layouts.Theme;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.*;
+<<<<<<< Updated upstream
 import java.awt.*;
+=======
+>>>>>>> Stashed changes
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,14 +26,14 @@ public class ActionHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == Main.startButton){
-            if (Main.startButton.getText() == "ON"){
-                if (JDAMehodes.shardMan != null){
+        if (e.getSource() == Main.startButton) {
+            if (Main.startButton.getText() == "ON") {
+                if (JDAMehodes.shardMan != null) {
                     JDAMehodes.stop();
                     Main.server.clear();
                     Main.serverList.removeAllItems();
                 }
-                if (JDAMehodes.botToken != null){
+                if (JDAMehodes.botToken != null) {
                     try {
                         JDAMehodes.build(JDAMehodes.botToken);
                     } catch (LoginException | InterruptedException ex) {
@@ -42,30 +44,18 @@ public class ActionHandler implements ActionListener {
                     } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
-
-                    Main.server.clear();
-
-                    for (Guild guild : JDAMehodes.shardMan.getGuilds()) {
-
-                        Main.server.add(guild.getName());
-                    }
-                    Main.serverList.removeAllItems();
-                    for (int i = 0; i < Main.server.size(); i++){
-
-                        System.out.println(Main.server.get(i));
-                        Main.serverList.addItem(Main.server.get(i));
-
-
-                    }
-
+                    JDAMehodes.serverList();
                     Main.startButton.setText("OFF");
-
                 }
+<<<<<<< Updated upstream
 
 
             }else if (Main.startButton.getText() == "OFF") {
 
 
+=======
+            } else if (Main.startButton.getText() == "OFF") {
+>>>>>>> Stashed changes
                 Main.startButton.setText("ON");
                 Main.server.clear();
                 Main.serverList.removeAllItems();
@@ -73,10 +63,11 @@ public class ActionHandler implements ActionListener {
             }
         }
 
-        if (e.getSource() == Main.textField){
+        if (e.getSource() == Main.textField) {
             JDAMehodes.shardMan.getGuildById("1002465926366642268").getTextChannelById("1002465927247442002").sendMessage(Main.textField.getText());
 
             Main.textField.setText("");
+<<<<<<< Updated upstream
 
         }
 
@@ -113,7 +104,23 @@ public class ActionHandler implements ActionListener {
             tokenfl.setText("");
 
         }
+=======
+        }
 
+        if (e.getSource() == Main.tokenField) {
+            Main.botToken = Main.tokenField.getText();
+            JDAMehodes.botToken = Main.tokenField.getText();
+            Main.textField.setText("");
+        }
 
+        if (e.getSource() == Main.token) {
+            Object[] inputFields = { Main.tokenLabel, Main.tokenField };
+            int setupPane = JOptionPane.showConfirmDialog(null, inputFields, "Bot Setup", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+>>>>>>> Stashed changes
+
+            if(setupPane == JOptionPane.OK_OPTION) {
+                JDAMehodes.botToken = Main.tokenField.getText();
+            }
+        }
     }
 }
