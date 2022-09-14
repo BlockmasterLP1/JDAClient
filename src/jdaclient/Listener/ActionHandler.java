@@ -75,6 +75,12 @@ public class ActionHandler implements ActionListener {
             Main.updateComponents();
         }
 
+        if (e.getSource() == Main.purplemode) {
+            Main.theme = 2;
+            Theme.purple();
+            Main.updateComponents();
+        }
+
         if (e.getSource() == Main.token) {
             Object[] inputFields = {Main.botTokenLabel, Main.botToken};
             int setupPane = JOptionPane.showConfirmDialog(null, inputFields, "Bot Setup", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);

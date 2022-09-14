@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
 
     public static List<String> server = new ArrayList<>();
-    public static int theme = 0;
+    public static int theme = 2;
 
     //frames
     public static JFrame mainframe;
@@ -25,6 +25,7 @@ public class Main {
     public static JMenu themeSelection;
     public static JMenuItem darkmode;
     public static JMenuItem whitemode;
+    public static JMenuItem purplemode;
     public static JMenu bot;
     public static JMenuItem token;
 
@@ -124,6 +125,9 @@ public class Main {
         whitemode = new JMenuItem("Whitemode");
         whitemode.addActionListener(new ActionHandler());
 
+        purplemode = new JMenuItem("Purplemode");
+        purplemode.addActionListener(new ActionHandler());
+
         bot = new JMenu("Bot");
 
         token = new JMenuItem("Token");
@@ -143,6 +147,7 @@ public class Main {
         settings.add(themeSelection);
         themeSelection.add(darkmode);
         themeSelection.add(whitemode);
+        themeSelection.add(purplemode);
         menuBar.add(bot);
         bot.add(token);
 
@@ -193,6 +198,10 @@ public class Main {
         darkmode.setBackground(Theme.menuColor);
         darkmode.setForeground(Theme.schriftColor);
         darkmode.setBorder(new LineBorder(Theme.menuColor));
+
+        purplemode.setBackground(Theme.menuColor);
+        purplemode.setForeground(Theme.schriftColor);
+        purplemode.setBorder(new LineBorder(Theme.menuColor));
 
         bot.setBackground(Theme.menuColor);
         bot.setForeground(Theme.schriftColor);
