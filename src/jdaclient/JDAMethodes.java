@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
-public class JDAMehodes {
+public class JDAMethodes {
 
     public static JDABuilder builder;
     public static JDA shardMan;
@@ -43,17 +43,5 @@ public class JDAMehodes {
         botActivity = activity;
 
         System.out.println("[JDA Client] Set activity to " + activityType + ": " + activity + "!");
-    }
-
-    public static void serverList() {
-
-    }
-
-    public static void channelList() {
-
-    }
-
-    public static void memberList() {
-
     }
 }

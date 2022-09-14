@@ -2,19 +2,18 @@ package jdaclient;
 
 import jdaclient.Listener.ActionHandler;
 import jdaclient.layouts.Theme;
-import net.dv8tion.jda.api.entities.Guild;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import jdaclient.Listener.ActionHandler.*;
 
 public class Main {
 
     public static List<String> server = new ArrayList<>();
-
     public static int theme = 0;
 
     //frames
@@ -23,45 +22,42 @@ public class Main {
     //menus
     public static JMenuBar menuBar;
     public static JMenu settings;
-    public static JMenu bot;
-
-    public static JMenu them;
+    public static JMenu themeSelection;
     public static JMenuItem darkmode;
     public static JMenuItem whitemode;
-
-    public  static  JMenuItem token;
+    public static JMenu bot;
+    public static JMenuItem token;
 
     //panel
-    public static JPanel  listPanel;
     public static JPanel mainPanel;
     public static JPanel chatPanel;
-
     public static JPanel sideBar;
-
     public static JPanel infoPanel;
+    public static JPanel listPanel;
 
     //components
     public static JButton startButton;
     public static JTextField textField;
     public static JComboBox serverList;
-    public static  JComboBox chatList;
+    public static JComboBox chatList;
+    public static JLabel botTokenLabel;
+    public static JTextField botToken;
 
     public static void main(String[] args) {
-
-        JDAMehodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
 
         frame();
         new Theme();
-
     }
 
-    public static void frame()
-    {
-        //create Frame
+    public static void frame() {
         mainframe = new JFrame();
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.setVisible(true);
-        //panel
+        mainframe.setTitle("Jda Client");
+        mainframe.setSize(new Dimension(750, 500));
+        mainframe.setMinimumSize(new Dimension(750, 500));
+
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.GREEN);
         mainPanel.setLayout(new BorderLayout(0, 0));
@@ -76,14 +72,14 @@ public class Main {
         sideBar.setBorder(new EmptyBorder(15, 15,15,15));
         sideBar.setPreferredSize(new Dimension(200, mainPanel.getHeight()));
 
-        textField = new JTextField();
-        textField.setSize(chatPanel.getWidth(), 100);
-        textField.setBorder(new EmptyBorder(5, 5, 5, 5));
-        textField.addActionListener(new ActionHandler());
-
         infoPanel = new JPanel();
         infoPanel.setLayout(null);
         infoPanel.setPreferredSize(new Dimension(sideBar.getWidth(), 50));
+
+        listPanel = new JPanel();
+        listPanel.setLayout(null);
+        listPanel.setPreferredSize(new Dimension(sideBar.getWidth(), 50));
+        listPanel.setBorder(null);
 
         startButton = new JButton("ON");
         startButton.setBounds(0,0,50,50);
@@ -92,10 +88,10 @@ public class Main {
         startButton.setFocusable(false);
         startButton.addActionListener(new ActionHandler());
 
-        listPanel = new JPanel();
-        listPanel.setLayout(null);
-        listPanel.setPreferredSize(new Dimension(sideBar.getWidth(), 50));
-        listPanel.setBorder(null);
+        textField = new JTextField();
+        textField.setSize(chatPanel.getWidth(), 100);
+        textField.setBorder(new EmptyBorder(5, 5, 5, 5));
+        textField.addActionListener(new ActionHandler());
 
         serverList = new JComboBox();
         serverList.setBounds(0,0,190,50);
@@ -108,7 +104,19 @@ public class Main {
         chatList.setBorder(null);
         chatList.setFocusable(false);
 
-        them = new JMenu("Theme");
+        botTokenLabel = new JLabel();
+
+        botToken = new JTextField();
+        botToken.setBorder(new EmptyBorder(2, 2, 2, 2));
+        botToken.setText(JDAMethodes.botToken);
+
+        //menus
+        menuBar = new JMenuBar();
+        //menuBar.setBorderPainted(false);
+
+        settings = new JMenu("Settings");
+
+        themeSelection = new JMenu("Theme");
 
         darkmode = new JMenuItem("Darkmode");
         darkmode.addActionListener(new ActionHandler());
@@ -116,34 +124,10 @@ public class Main {
         whitemode = new JMenuItem("Whitemode");
         whitemode.addActionListener(new ActionHandler());
 
-        token = new JMenuItem("Token");
-        token.addActionListener(new ActionHandler());
-
-        //menu
-        menuBar = new JMenuBar();
-        menuBar.setBorder(null);
-        menuBar.setOpaque(true);
-        menuBar.setBorderPainted(false);
-        settings = new JMenu("Settings");
         bot = new JMenu("Bot");
 
-
-        menuBar.add(settings);
-        menuBar.add(bot);
-        settings.add(them);
-        bot.add(token);
-        them.add(darkmode);
-        them.add(whitemode);
-
-
-        //settings
-
-
-        //settings
-        mainframe.setTitle("Jda Client");
-
-        mainframe.setSize(new Dimension(750, 500));
-        mainframe.setMinimumSize(new Dimension(750, 500));
+        token = new JMenuItem("Token");
+        token.addActionListener(new ActionHandler());
 
         //add
         listPanel.add(serverList);
@@ -155,56 +139,91 @@ public class Main {
         mainPanel.add(chatPanel , BorderLayout.CENTER);
         mainPanel.add(sideBar , BorderLayout.EAST);
 
+        menuBar.add(settings);
+        settings.add(themeSelection);
+        themeSelection.add(darkmode);
+        themeSelection.add(whitemode);
+        menuBar.add(bot);
+        bot.add(token);
+
         mainframe.setJMenuBar(menuBar);
         mainframe.setContentPane(mainPanel);
         mainframe.pack();
-
     }
 
-    public static void updateComponents(){
-        menuBar.setBackground(Theme.background);
-        menuBar.setForeground(Theme.schrift);
+    public static void updateComponents() {
+        //tokenPane
+        UIManager.put("OptionPane.background", Theme.backgroundColor);
+        UIManager.put("Panel.background", Theme.backgroundColor);
+        UIManager.put("Button.background", Theme.componentsColor);
+        UIManager.put("Button.foreground", Theme.schriftColor);
+        UIManager.put("Button.border", (BorderFactory.createLineBorder(Theme.componentsColor, 5)));
+        UIManager.put("Button.select", Theme.hoverColor);
+        UIManager.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
 
-        bot.setBackground(Theme.background);
-        bot.setForeground(Theme.schrift);
+        //menus
+        /*UIManager.put("PopupMenu.border", null);
+        UIManager.put("MenuBar.opaque", true);
+        UIManager.put("MenuBar.selectionBackground", Theme.hoverColor);
+        UIManager.put("Menu.opaque", true);
+        UIManager.put("Menu.selectionBackground", Theme.hoverColor);
+        UIManager.put("MenuItem.opaque", true);
+        UIManager.put("MenuItem.selectionBackground", Theme.hoverColor);*/
 
-        settings.setBackground(Theme.background);
-        settings.setForeground(Theme.schrift);
+        menuBar.setBackground(Theme.menuColor);
+        menuBar.setForeground(Theme.schriftColor);
+        menuBar.setBorder(new LineBorder(Theme.menuColor));
 
-        mainPanel.setBackground(Theme.components);
-        mainPanel.setForeground(Theme.schrift);
+        settings.setBackground(Theme.menuColor);
+        settings.setForeground(Theme.schriftColor);
+        settings.setBorder(new LineBorder(Theme.menuColor));
+        settings.getPopupMenu().setBackground(Theme.menuColor);
+        settings.getPopupMenu().setBorder(new LineBorder(Theme.menuColor, 2));
 
-        sideBar.setBackground(Theme.components1);
-        sideBar.setForeground(Theme.schrift);
+        themeSelection.setBackground(Theme.menuColor);
+        themeSelection.setForeground(Theme.schriftColor);
+        themeSelection.setBorder(new LineBorder(Theme.menuColor));
+        themeSelection.getPopupMenu().setBackground(Theme.menuColor);
+        themeSelection.getPopupMenu().setBorder(new LineBorder(Theme.menuColor, 2));
 
-        textField.setBackground(Theme.background);
-        textField.setForeground(Theme.schrift);
+        whitemode.setBackground(Theme.menuColor);
+        whitemode.setForeground(Theme.schriftColor);
+        whitemode.setBorder(new LineBorder(Theme.menuColor));
 
+        darkmode.setBackground(Theme.menuColor);
+        darkmode.setForeground(Theme.schriftColor);
+        darkmode.setBorder(new LineBorder(Theme.menuColor));
+
+        bot.setBackground(Theme.menuColor);
+        bot.setForeground(Theme.schriftColor);
+        bot.setBorder(new LineBorder(Theme.menuColor));
+        bot.getPopupMenu().setBackground(Theme.menuColor);
+        bot.getPopupMenu().setBorder(new LineBorder(Theme.menuColor, 2));
+
+        token.setBackground(Theme.menuColor);
+        token.setForeground(Theme.schriftColor);
+        token.setBorder(new LineBorder(Theme.menuColor));
+
+        //panels
+        mainPanel.setBackground(Theme.backgroundColor);
+        mainPanel.setForeground(Theme.schriftColor);
+        chatPanel.setBackground(null);
+        sideBar.setBackground(Theme.panelColor);
+        sideBar.setForeground(Theme.schriftColor);
         infoPanel.setBackground(null);
-
-        startButton.setBackground(Theme.components);
-        startButton.setForeground(Theme.schrift);
-
-        serverList.setBackground(null);
-
-        chatList.setBackground(null);
-
         listPanel.setBackground(null);
 
-        chatPanel.setBackground(null);
-
-        them.setBackground(Theme.background);
-        them.setForeground(Theme.schrift);
-
-        whitemode.setBackground(Theme.background);
-        whitemode.setForeground(Theme.schrift);
-
-        darkmode.setBackground(Theme.background);
-        darkmode.setForeground(Theme.schrift);
-
-        token.setBackground(Theme.background);
-        token.setForeground(Theme.schrift);
-
-        ActionHandler.tokenfl.setBackground(Theme.background);
+        //components
+        startButton.setBackground(Theme.componentsColor);
+        startButton.setForeground(Theme.schriftColor);
+        textField.setBackground(Theme.componentsColor);
+        textField.setForeground(Theme.schriftColor);
+        textField.setCaretColor(Theme.schriftColor);
+        serverList.setBackground(null);
+        chatList.setBackground(null);
+        botTokenLabel.setForeground(Theme.schriftColor);
+        botToken.setBackground(Theme.componentsColor);
+        botToken.setForeground(Theme.schriftColor);
+        botToken.setCaretColor(Theme.schriftColor);
     }
 }

@@ -1,119 +1,83 @@
 package jdaclient.Listener;
 
-import jdaclient.JDAMehodes;
+import jdaclient.JDAMethodes;
 import jdaclient.Main;
 import jdaclient.layouts.Theme;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.TextChannel;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static jdaclient.Main.*;
-import static jdaclient.JDAMehodes.*;
-import static jdaclient.layouts.Theme.*;
-
 public class ActionHandler implements ActionListener {
-
-    public static JFrame tokenframe;
-    public static  JTextField tokenfl;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == Main.startButton){
-            if (Main.startButton.getText() == "ON"){
-                if (JDAMehodes.shardMan != null){
-                    JDAMehodes.stop();
+        if (e.getSource() == Main.startButton) {
+            if (Main.startButton.getText() == "ON") {
+                if (JDAMethodes.shardMan != null) {
+                    JDAMethodes.stop();
                     Main.server.clear();
                     Main.serverList.removeAllItems();
                 }
-                if (JDAMehodes.botToken != null){
+                if (JDAMethodes.botToken != null) {
                     try {
-                        JDAMehodes.build(JDAMehodes.botToken);
+                        JDAMethodes.build(JDAMethodes.botToken);
                     } catch (LoginException | InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
                     try {
-                        JDAMehodes.shardMan.awaitReady();
+                        JDAMethodes.shardMan.awaitReady();
                     } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
 
                     Main.server.clear();
-
-                    for (Guild guild : JDAMehodes.shardMan.getGuilds()) {
-
+                    for (Guild guild : JDAMethodes.shardMan.getGuilds()) {
                         Main.server.add(guild.getName());
                     }
                     Main.serverList.removeAllItems();
                     for (int i = 0; i < Main.server.size(); i++){
-
                         System.out.println(Main.server.get(i));
                         Main.serverList.addItem(Main.server.get(i));
-
-
                     }
 
                     Main.startButton.setText("OFF");
-
                 }
 
 
-            }else if (Main.startButton.getText() == "OFF") {
-
-
-                Main.startButton.setText("ON");
+            } else if (Main.startButton.getText() == "OFF") {
                 Main.server.clear();
                 Main.serverList.removeAllItems();
-                JDAMehodes.stop();
+
+                JDAMethodes.stop();
+
+                Main.startButton.setText("ON");
             }
         }
 
-        if (e.getSource() == Main.textField){
-            JDAMehodes.shardMan.getGuildById("1002465926366642268").getTextChannelById("1002465927247442002").sendMessage(Main.textField.getText());
+        if (e.getSource() == Main.textField) {
+            JDAMethodes.shardMan.getGuildById("1002465926366642268").getTextChannelById("1002465927247442002").sendMessage(Main.textField.getText());
 
             Main.textField.setText("");
-
         }
 
-        if (e.getSource() == Main.whitemode){
-            theme = 1;
-            whitemode();
-            updateComponents();
+        if (e.getSource() == Main.whitemode) {
+            Main.theme = 1;
+            Theme.whitemode();
+            Main.updateComponents();
         }
 
         if (e.getSource() == Main.darkmode) {
-            theme = 0;
-            darkmode();
-            updateComponents();
+            Main.theme = 0;
+            Theme.darkmode();
+            Main.updateComponents();
         }
 
-        if (e.getSource() == token) {
-            tokenframe = new JFrame("Bot");
-            tokenframe.setSize(300, 200);
-            tokenframe.setVisible(true);
-
-            tokenfl = new JTextField();
-            tokenfl.setSize(100, 50);
-            tokenfl.setBorder(null);
-            tokenfl.addActionListener(new ActionHandler());
-
-            tokenframe.add(tokenfl, BorderLayout.CENTER);
-
-
+        if (e.getSource() == Main.token) {
+            Object[] inputFields = {Main.botTokenLabel, Main.botToken};
+            int setupPane = JOptionPane.showConfirmDialog(null, inputFields, "Bot Setup", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         }
-
-        if (e.getSource() == tokenfl) {
-            JDAMehodes.botToken = tokenfl.getText();
-            System.out.println(tokenfl.getText());
-            tokenfl.setText("");
-
-        }
-
-
     }
 }
