@@ -26,6 +26,8 @@ public class Theme {
         hover = Color.decode("#BFBFBF");
     }
 
+
+
     public Theme(){
         if (Main.theme == 0)
         {
