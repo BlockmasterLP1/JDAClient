@@ -8,8 +8,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
@@ -44,11 +48,32 @@ public class Main {
     public static JLabel botTokenLabel;
     public static JTextField botToken;
 
+    //chat
+    public static JTextArea chatField;
+
+    /*public static  boolean e = true;
+
+    public static  void bufferreader(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String test = null;
+        try {
+            test = reader.readLine();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        chatField.setText(test);
+    }*/
+
     public static void main(String[] args) {
         JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
 
         frame();
         new Theme();
+
+        /*while (e)
+        {
+            bufferreader();
+        }*/
     }
 
     public static void frame() {
@@ -111,6 +136,11 @@ public class Main {
         botToken.setBorder(new EmptyBorder(2, 2, 2, 2));
         botToken.setText(JDAMethodes.botToken);
 
+        chatField = new JTextArea();
+        chatField.setSize(chatPanel.getWidth(), 100);
+        chatField.setBorder(new EmptyBorder(5, 5, 5, 5));
+        chatField.setEditable(false);
+
         //menus
         menuBar = new JMenuBar();
         //menuBar.setBorderPainted(false);
@@ -142,6 +172,7 @@ public class Main {
         chatPanel.add(textField , BorderLayout.SOUTH);
         mainPanel.add(chatPanel , BorderLayout.CENTER);
         mainPanel.add(sideBar , BorderLayout.EAST);
+        chatPanel.add(chatField);
 
         menuBar.add(settings);
         settings.add(themeSelection);
@@ -150,6 +181,8 @@ public class Main {
         themeSelection.add(purplemode);
         menuBar.add(bot);
         bot.add(token);
+
+
 
         mainframe.setJMenuBar(menuBar);
         mainframe.setContentPane(mainPanel);
@@ -235,4 +268,7 @@ public class Main {
         botToken.setForeground(Theme.schriftColor);
         botToken.setCaretColor(Theme.schriftColor);
     }
+
+
+
 }
