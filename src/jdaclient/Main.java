@@ -51,9 +51,8 @@ public class Main {
     //chat
     public static JTextArea chatField;
 
-    /*public static  boolean e = true;
 
-    public static  void bufferreader(){
+    /*public static  void bufferreader(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String test = null;
         try {
@@ -61,7 +60,8 @@ public class Main {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        chatField.setText(test);
+
+        chatField.append(test + "\n");
     }*/
 
     public static void main(String[] args) {
@@ -70,7 +70,7 @@ public class Main {
         frame();
         new Theme();
 
-        /*while (e)
+        /*while (true)
         {
             bufferreader();
         }*/
