@@ -8,8 +8,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
@@ -17,6 +21,7 @@ public class Main {
     public static List<String> channels = new ArrayList<>();
 
     public static int theme = 0;
+    public static int theme = 2;
 
     //frames
     public static JFrame mainframe;
@@ -27,6 +32,7 @@ public class Main {
     public static JMenu themeSelection;
     public static JMenuItem darkmode;
     public static JMenuItem whitemode;
+    public static JMenuItem purplemode;
     public static JMenu bot;
     public static JMenuItem token;
 
@@ -44,11 +50,12 @@ public class Main {
     public static JComboBox chatList;
     public static JLabel botTokenLabel;
     public static JTextField botToken;
+    public static JTextArea chatField;
 
     public static JTabbedPane chatPane;
 
     public static void main(String[] args) {
-        //JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMaRCH.Y9mGVDBsXBmBZwN70PwTaqiKYSud4reloCDhKk";
 
         frame();
         new Theme();
@@ -116,6 +123,11 @@ public class Main {
 
         chatPane = new JTabbedPane();
 
+        chatField = new JTextArea();
+        chatField.setSize(chatPanel.getWidth(), 100);
+        chatField.setBorder(new EmptyBorder(5, 5, 5, 5));
+        chatField.setEditable(false);
+
         //menus
         menuBar = new JMenuBar();
         //menuBar.setBorderPainted(false);
@@ -129,6 +141,9 @@ public class Main {
 
         whitemode = new JMenuItem("Whitemode");
         whitemode.addActionListener(new ActionHandler());
+
+        purplemode = new JMenuItem("Purplemode");
+        purplemode.addActionListener(new ActionHandler());
 
         bot = new JMenu("Bot");
 
@@ -149,6 +164,7 @@ public class Main {
 
         mainPanel.add(chatPanel , BorderLayout.CENTER);
         mainPanel.add(sideBar , BorderLayout.EAST);
+        chatPanel.add(chatField);
 
         menuBar.add(settings);
 
@@ -156,10 +172,13 @@ public class Main {
 
         themeSelection.add(darkmode);
         themeSelection.add(whitemode);
+        themeSelection.add(purplemode);
 
         menuBar.add(bot);
 
         bot.add(token);
+
+
 
         mainframe.setJMenuBar(menuBar);
         mainframe.setContentPane(mainPanel);
@@ -209,6 +228,10 @@ public class Main {
         darkmode.setForeground(Theme.schriftColor);
         darkmode.setBorder(new LineBorder(Theme.menuColor));
 
+        purplemode.setBackground(Theme.menuColor);
+        purplemode.setForeground(Theme.schriftColor);
+        purplemode.setBorder(new LineBorder(Theme.menuColor));
+
         bot.setBackground(Theme.menuColor);
         bot.setForeground(Theme.schriftColor);
         bot.setBorder(new LineBorder(Theme.menuColor));
@@ -218,6 +241,9 @@ public class Main {
         token.setBackground(Theme.menuColor);
         token.setForeground(Theme.schriftColor);
         token.setBorder(new LineBorder(Theme.menuColor));
+
+        chatField.setBackground(Theme.componentsColor);
+        chatField.setForeground(Theme.schriftColor);
 
         //panels
         mainPanel.setBackground(Theme.backgroundColor);
@@ -242,4 +268,7 @@ public class Main {
         botToken.setForeground(Theme.schriftColor);
         botToken.setCaretColor(Theme.schriftColor);
     }
+
+
+
 }

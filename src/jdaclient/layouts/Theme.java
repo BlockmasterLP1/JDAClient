@@ -27,6 +27,15 @@ public class Theme {
         panelColor = Color.decode("#ECECEC");
         schriftColor = Color.decode("#676767");
         hoverColor = Color.decode("#BFBFBF");
+        menuColor = Color.decode("#FFFFFF");
+    }
+    public static void purple(){
+        backgroundColor = Color.decode("#2B243B");
+        componentsColor = Color.decode("#211737");
+        panelColor = Color.decode("#261942");
+        menuColor = Color.decode("#312058");
+        schriftColor = Color.decode("#99AAB5");
+        hoverColor = Color.decode("#291D46");
     }
 
     public Theme(){
@@ -34,6 +43,8 @@ public class Theme {
             darkmode();
         } else if (Main.theme == 1) {
             whitemode();
+        } else if (Main.theme == 2) {
+            purple();
         } else {
             System.out.println("pech gehabt");
         }

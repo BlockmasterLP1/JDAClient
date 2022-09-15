@@ -5,8 +5,6 @@ import jdaclient.Main;
 import jdaclient.layouts.Theme;
 import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageHistory;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.*;
@@ -91,7 +89,13 @@ public class ActionHandler implements ActionListener {
             Main.updateComponents();
         }
 
-        if(e.getSource() == Main.token) {
+        if (e.getSource() == Main.purplemode) {
+            Main.theme = 2;
+            Theme.purple();
+            Main.updateComponents();
+        }
+
+        if (e.getSource() == Main.token) {
             Object[] inputFields = {Main.botTokenLabel, Main.botToken};
             int setupPane = JOptionPane.showConfirmDialog(null, inputFields, "Bot Setup", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if(setupPane == JOptionPane.OK_OPTION) {
