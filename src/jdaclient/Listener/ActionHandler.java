@@ -52,7 +52,8 @@ public class ActionHandler implements ActionListener {
                     if(Main.serverList.getSelectedItem() != null) {
                         String listItem = Main.serverList.getSelectedItem().toString();
                         String itemId[] = listItem.split(Pattern.quote(" | "));
-                        for(Channel channel : JDAMethodes.shardMan.getGuildById(itemId[1]).getTextChannels()) {
+                        int itemArray = itemId.length - 1;
+                        for(Channel channel : JDAMethodes.shardMan.getGuildById(itemId[itemArray]).getTextChannels()) {
                             /*JList channelChat = new JList();
                             channelChat.setName(channel.getName());
                             MessageHistory history = MessageHistory.getHistoryFromBeginning(); //MessageHistory.getHistoryFromBeginning(JDAMethodes.shardMan.getC).complete();
