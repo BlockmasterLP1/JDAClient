@@ -14,6 +14,8 @@ import java.util.List;
 public class Main {
 
     public static List<String> server = new ArrayList<>();
+    public static List<String> channels = new ArrayList<>();
+
     public static int theme = 0;
 
     //frames
@@ -43,8 +45,10 @@ public class Main {
     public static JLabel botTokenLabel;
     public static JTextField botToken;
 
+    public static JTabbedPane chatPane;
+
     public static void main(String[] args) {
-        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+        //JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
 
         frame();
         new Theme();
@@ -63,12 +67,12 @@ public class Main {
         mainPanel.setLayout(new BorderLayout(0, 0));
 
         chatPanel = new JPanel();
-        chatPanel.setLayout(new BorderLayout(5 ,5));
+        chatPanel.setLayout(new BorderLayout(0 ,15));
         chatPanel.setBorder(new EmptyBorder(20, 15,20,15));
         chatPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), mainPanel.getHeight()));
 
         sideBar = new JPanel();
-        sideBar.setLayout(new BorderLayout(5 ,5));
+        sideBar.setLayout(new BorderLayout(0 ,0));
         sideBar.setBorder(new EmptyBorder(15, 15,15,15));
         sideBar.setPreferredSize(new Dimension(200, mainPanel.getHeight()));
 
@@ -110,6 +114,8 @@ public class Main {
         botToken.setBorder(new EmptyBorder(2, 2, 2, 2));
         botToken.setText(JDAMethodes.botToken);
 
+        chatPane = new JTabbedPane();
+
         //menus
         menuBar = new JMenuBar();
         //menuBar.setBorderPainted(false);
@@ -132,18 +138,27 @@ public class Main {
         //add
         listPanel.add(serverList);
         listPanel.add(chatList);
+
         sideBar.add(listPanel, BorderLayout.NORTH);
         sideBar.add(infoPanel, BorderLayout.SOUTH);
+
         infoPanel.add(startButton);
+
         chatPanel.add(textField , BorderLayout.SOUTH);
+        chatPanel.add(chatPane, BorderLayout.CENTER);
+
         mainPanel.add(chatPanel , BorderLayout.CENTER);
         mainPanel.add(sideBar , BorderLayout.EAST);
 
         menuBar.add(settings);
+
         settings.add(themeSelection);
+
         themeSelection.add(darkmode);
         themeSelection.add(whitemode);
+
         menuBar.add(bot);
+
         bot.add(token);
 
         mainframe.setJMenuBar(menuBar);
@@ -219,7 +234,8 @@ public class Main {
         textField.setBackground(Theme.componentsColor);
         textField.setForeground(Theme.schriftColor);
         textField.setCaretColor(Theme.schriftColor);
-        serverList.setBackground(null);
+        serverList.setBackground(Theme.componentsColor);
+        serverList.setForeground(Theme.schriftColor);
         chatList.setBackground(null);
         botTokenLabel.setForeground(Theme.schriftColor);
         botToken.setBackground(Theme.componentsColor);
