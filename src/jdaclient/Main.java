@@ -246,6 +246,9 @@ public class Main {
         token.setForeground(Theme.schriftColor);
         token.setBorder(new LineBorder(Theme.menuColor));
 
+        chatField.setBackground(Theme.componentsColor);
+        chatField.setForeground(Theme.schriftColor);
+
         //panels
         mainPanel.setBackground(Theme.backgroundColor);
         mainPanel.setForeground(Theme.schriftColor);
