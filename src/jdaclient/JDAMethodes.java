@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
+import java.net.http.WebSocket;
+
 public class JDAMethodes {
 
     public static JDABuilder builder;
@@ -44,4 +46,7 @@ public class JDAMethodes {
 
         System.out.println("[JDA Client] Set activity to " + activityType + ": " + activity + "!");
     }
+
+
+
 }

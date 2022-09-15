@@ -65,7 +65,7 @@ public class Main {
     }*/
 
     public static void main(String[] args) {
-        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMBfha.tpNahRd0oRTKymNEkkIAPfTPVrRkmn9icZKpKs";
+        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMaRCH.Y9mGVDBsXBmBZwN70PwTaqiKYSud4reloCDhKk";
 
         frame();
         new Theme();
