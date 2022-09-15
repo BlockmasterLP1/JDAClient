@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Guild;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
@@ -22,6 +23,7 @@ public class ActionHandler implements ActionListener {
                     JDAMethodes.stop();
                     Main.server.clear();
                     Main.serverList.removeAllItems();
+                    Main.chatPane.removeAll();
                 }
                 if(JDAMethodes.botToken != null) {
                     try {
@@ -46,6 +48,7 @@ public class ActionHandler implements ActionListener {
                         Main.serverList.addItem(Main.server.get(i));
                     }
 
+                    Main.chatPane.removeAll();
                     if(Main.serverList.getSelectedItem() != null) {
                         String listItem = Main.serverList.getSelectedItem().toString();
                         String itemId[] = listItem.split(Pattern.quote(" | "));
@@ -56,6 +59,17 @@ public class ActionHandler implements ActionListener {
                             List<Message> mess = history.getRetrievedHistory();
 
                             Main.chatPane.add(channelChat);*/
+
+                            Main.chatField = new JTextArea();
+                            Main.chatField.setName(channel.getName());
+                            Main.chatField.setSize(Main.chatPanel.getWidth(), 100);
+                            Main.chatField.setBorder(new EmptyBorder(5, 5, 5, 5));
+                            Main.chatField.setEditable(false);
+
+                            Main.chatField.setBackground(Theme.componentsColor);
+                            Main.chatField.setForeground(Theme.schriftColor);
+
+                            Main.chatPane.add(Main.chatField);
                         }
                     }
 
@@ -64,6 +78,7 @@ public class ActionHandler implements ActionListener {
             } else if(Main.startButton.getText() == "OFF") {
                 Main.server.clear();
                 Main.serverList.removeAllItems();
+                Main.chatPane.removeAll();
 
                 JDAMethodes.stop();
 

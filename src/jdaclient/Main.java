@@ -8,12 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Main {
 
@@ -21,7 +17,6 @@ public class Main {
     public static List<String> channels = new ArrayList<>();
 
     public static int theme = 0;
-    public static int theme = 2;
 
     //frames
     public static JFrame mainframe;
@@ -55,7 +50,7 @@ public class Main {
     public static JTabbedPane chatPane;
 
     public static void main(String[] args) {
-        JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMaRCH.Y9mGVDBsXBmBZwN70PwTaqiKYSud4reloCDhKk";
+        //JDAMethodes.botToken = "MTAxNDkzNzg4MTE2NjQ5NTc5NQ.GMaRCH.Y9mGVDBsXBmBZwN70PwTaqiKYSud4reloCDhKk";
 
         frame();
         new Theme();
@@ -164,7 +159,6 @@ public class Main {
 
         mainPanel.add(chatPanel , BorderLayout.CENTER);
         mainPanel.add(sideBar , BorderLayout.EAST);
-        chatPanel.add(chatField);
 
         menuBar.add(settings);
 
@@ -177,8 +171,6 @@ public class Main {
         menuBar.add(bot);
 
         bot.add(token);
-
-
 
         mainframe.setJMenuBar(menuBar);
         mainframe.setContentPane(mainPanel);
