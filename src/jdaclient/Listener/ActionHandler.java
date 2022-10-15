@@ -5,18 +5,24 @@ import jdaclient.Main;
 import jdaclient.layouts.Theme;
 import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.TextChannel;
+import org.w3c.dom.Text;
 
 import javax.security.auth.login.LoginException;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class ActionHandler implements ActionListener {
 
+
+    public ArrayList<TextChannel> channels = new ArrayList<>();
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource() == Main.startButton) {
             if(Main.startButton.getText() == "ON") {
                 if(JDAMethodes.shardMan != null) {
@@ -53,7 +59,7 @@ public class ActionHandler implements ActionListener {
                         String listItem = Main.serverList.getSelectedItem().toString();
                         String itemId[] = listItem.split(Pattern.quote(" | "));
                         int itemArray = itemId.length - 1;
-                        for(Channel channel : JDAMethodes.shardMan.getGuildById(itemId[itemArray]).getTextChannels()) {
+                        for(TextChannel channel : JDAMethodes.shardMan.getGuildById(itemId[itemArray]).getTextChannels()) {
                             /*JList channelChat = new JList();
                             channelChat.setName(channel.getName());
                             MessageHistory history = MessageHistory.getHistoryFromBeginning(); //MessageHistory.getHistoryFromBeginning(JDAMethodes.shardMan.getC).complete();
@@ -71,8 +77,12 @@ public class ActionHandler implements ActionListener {
                             Main.chatField.setForeground(Theme.schriftColor);
 
                             Main.chatPane.add(Main.chatField);
+
+                            channels.add(channel);
                         }
                     }
+
+
 
                     Main.startButton.setText("OFF");
                 }
@@ -88,7 +98,12 @@ public class ActionHandler implements ActionListener {
         }
 
         if(e.getSource() == Main.textField) {
-            JDAMethodes.shardMan.getGuildById("1002465926366642268").getTextChannelById("1002465927247442002").sendMessage(Main.textField.getText());
+
+            TextChannel channel = JDAMethodes.shardMan.getSelfUser().getJDA().getTextChannelById("853614354507497475");
+
+            channel.sendMessage(Main.textField.getText()).queue();
+
+            System.out.println(Main.textField.getText());
 
             Main.textField.setText("");
         }
